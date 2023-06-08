@@ -1,0 +1,13 @@
+dbtpostgres:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: mydbtpostgres
+      port: 5432
+      user: postgres
+      pass: mysecret
+      dbname: dbtdb
+      schema: dbtpostgres
+      threads: 1
+      keepalives_idle: 0

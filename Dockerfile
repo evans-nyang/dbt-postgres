@@ -29,14 +29,20 @@ ENV PYTHONIOENCODING=utf-8
 ENV LANG=C.UTF-8
 
 # Update python
-RUN python3 -m pip install --upgrade pip setuptools wheel --no-cache-dir
+RUN python -m pip install --upgrade --no-cache-dir pip setuptools wheel
 
 # Set docker basics
 WORKDIR /usr/app/dbt/
+
+# Create .dbt directory and copy profiles.yml
+RUN mkdir -p /root/.dbt
+COPY .dbt/profiles.yml /root/.dbt/profiles.yml
+COPY dbt_project.yml /usr/app/dbt/dbt_project.yml
+
 VOLUME /usr/app
 ENTRYPOINT ["dbt"]
 
 # dbt-postgres
 FROM base as dbt-postgres
 ARG dbt_postgres_ref=dbt-core@v1.6.0b2
-RUN python3 -m pip install --no-cache-dir "git+https://github.com/dbt-labs/${dbt_postgres_ref}#egg=dbt-postgres&subdirectory=plugins/postgres"
+RUN python -m pip install --no-cache-dir "git+https://github.com/dbt-labs/${dbt_postgres_ref}#egg=dbt-postgres&subdirectory=plugins/postgres"
