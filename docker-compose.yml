@@ -2,23 +2,28 @@ version: "3"
 
 services:
   dbt:
-    image: mydbt:v1.0
-    # build:
-    #   context: .
-    #   dockerfile: Dockerfile
-    #   target: dbt-postgres
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: dbt-postgres
+    container_name: dbt-con
     volumes:
-      - .:/dbt
+      - ./.dbt:/root/.dbt
+      - ./dbt_project.yml:/usr/app/dbt/dbt_project.yml
     ports:
       - ${PORT}:${PORT}
     env_file:
       - .env
     networks:
       - dbtnet
-    command: [ "dbt run" ]
+    command:
+      [
+        "run --profiles-dir /root/.dbt --project-dir /usr/app/dbt/ --target dev"
+      ]
 
   postgres:
     image: postgres:latest
+    container_name: mydbt-postgres
     environment:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
@@ -33,13 +38,11 @@ services:
     networks:
       - dbtnet
     command:
-      [
-        "postgres",
-        "-c",
-        "log_statement=all",
-        "-c",
-        "log_destination=stderr"
-      ]
+      - "postgres"
+      - "-c"
+      - "log_statement=all"
+      - "-c"
+      - "log_destination=stderr"
 
 networks:
   dbtnet:
