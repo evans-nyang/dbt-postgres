@@ -50,7 +50,7 @@ To get started with the project, follow these steps:
 5. Build and run the project using Docker Compose:
 
    ```bash
-   docker compose up -d --build
+   docker compose up --build
    ```
 
 6. Access the running project:
