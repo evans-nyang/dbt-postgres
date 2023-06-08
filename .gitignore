@@ -133,7 +133,8 @@ dmypy.json
 *.vscode
 
 # postgres data folder
-data
+pgdata
+pglogs
 
 # terraform variables
 variables.tf
@@ -144,5 +145,10 @@ variables.tf
 *._*
 
 # my files
-*pg*
 *.user.yml
+
+# my dirs 
+*.dbt
+target/
+dbt_packages/
+logs/

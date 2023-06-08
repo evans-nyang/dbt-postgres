@@ -37,7 +37,8 @@ WORKDIR /usr/app/dbt/
 # Create .dbt directory and copy profiles.yml
 RUN mkdir -p /root/.dbt
 COPY .dbt/profiles.yml /root/.dbt/profiles.yml
-COPY dbt_project.yml /usr/app/dbt/dbt_project.yml
+# COPY dbt_project.yml /usr/app/dbt/dbt_project.yml
+COPY . /usr/app/dbt/
 
 VOLUME /usr/app
 ENTRYPOINT ["dbt"]
