@@ -145,3 +145,4 @@ variables.tf
 
 # my files
 *pg*
+*.user.yml
