@@ -17,7 +17,6 @@ RUN apt-get update --fix-missing \
     make \
     ca-certificates \
     libpq-dev \
-    # && apt-get install --fix-broken \
     && apt-get clean \
     && rm -rf \
     /var/lib/apt/lists/* \
@@ -37,7 +36,7 @@ WORKDIR /usr/app/dbt/
 # Create .dbt directory and copy profiles.yml
 RUN mkdir -p /root/.dbt
 COPY .dbt/profiles.yml /root/.dbt/profiles.yml
-# COPY dbt_project.yml /usr/app/dbt/dbt_project.yml
+
 COPY . /usr/app/dbt/
 
 # Install dbt
