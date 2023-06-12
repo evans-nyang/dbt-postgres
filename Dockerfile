@@ -40,6 +40,12 @@ COPY .dbt/profiles.yml /root/.dbt/profiles.yml
 # COPY dbt_project.yml /usr/app/dbt/dbt_project.yml
 COPY . /usr/app/dbt/
 
+# Install dbt
+RUN pip install --no-cache-dir dbt-core
+
+# Run dbt deps before dbt run
+RUN dbt deps
+
 VOLUME /usr/app
 ENTRYPOINT ["dbt"]
 
