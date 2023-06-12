@@ -20,4 +20,4 @@ dbtpostgres:
       pass: "{{ env_var('POSTGRES_PASSWORD') }}"
       dbname: "{{ env_var('DBT_DB') }}"
       threads: 4
-      schema: dbtpostgres
+      schema: "{{ env_var('DBT_SCHEMA') }}"
