@@ -7,7 +7,7 @@ dbtpostgres:
       port: "{{ env_var('DB_PORT') | int }}"
       user: "{{ env_var('POSTGRES_USER') }}"
       pass: "{{ env_var('POSTGRES_PASSWORD') }}"
-      dbname: "{{ env_var('DBT_DB') }}"
+      dbname: "{{ env_var('POSTGRES_DB') }}"
       schema: dbtpostgres
       threads: 4
       keepalives_idle: 0
