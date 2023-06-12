@@ -7,10 +7,11 @@ sources:
     schema: public
     tables:
       - name: mobile_phones
-        description: Data from the mobile_phones table
+        description: >
+          One record per mobile phone
         columns:
           - name: data_id
-            description: Unique identifier for each entity
+            description: Primary key of the mobile_phones table
             tests:
               - unique
               - not_null
