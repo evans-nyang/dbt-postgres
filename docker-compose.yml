@@ -16,7 +16,7 @@ services:
       - .env
     networks:
       - dbtnet
-    command: "run"
+    command: "build"
 
   postgres:
     image: postgres:15
