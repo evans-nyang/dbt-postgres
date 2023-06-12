@@ -4,11 +4,10 @@ WITH stg_reviews AS (
 
 staged AS (
     SELECT
-        md5(trim(votes)) AS votes_hash,
+        md5(CAST(votes AS TEXT)) AS votes_hash,
         votes,
         stars
     FROM stg_reviews
-
 )
 
 SELECT * FROM staged
