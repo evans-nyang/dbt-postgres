@@ -40,6 +40,7 @@ fact_products AS (
         date_id,
         url_hash,
         price,
+        data_hash,
         brand_hash,
         votes_hash,
         dateid_url_hash
