@@ -13,12 +13,13 @@ dim_brands AS (
     SELECT 
         brand_hash, brand
     FROM stg_brands
-    {% if is_incremental() %}
+    {{ check_incremental('brand_hash') }}
+    -- {% if is_incremental() %}
 
-    -- this filter will only be applied on an incremental run
-    WHERE brand_hash NOT IN (SELECT brand_hash FROM {{ this }})
+    -- -- this filter will only be applied on an incremental run
+    -- WHERE brand_hash NOT IN (SELECT brand_hash FROM {{ this }})
 
-    {% endif %}
+    -- {% endif %}
 )
 
 SELECT * FROM dim_brands

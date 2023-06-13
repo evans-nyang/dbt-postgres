@@ -40,16 +40,18 @@ fact_products AS (
         date_id,
         url_hash,
         price,
+        data_hash,
         brand_hash,
         votes_hash,
         dateid_url_hash
     FROM proxy
-    {% if is_incremental() %}
+    {{ check_incremental('dateid_url_hash') }}
+    -- {% if is_incremental() %}
 
-    -- this filter will only be applied on an incremental run
-    WHERE dateid_url_hash NOT IN (SELECT dateid_url_hash FROM {{ this }}) 
+    -- -- this filter will only be applied on an incremental run
+    -- WHERE dateid_url_hash NOT IN (SELECT dateid_url_hash FROM {{ this }}) 
 
-    {% endif %}
+    -- {% endif %}
 )
 
 SELECT * FROM fact_products
