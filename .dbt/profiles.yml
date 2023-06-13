@@ -8,7 +8,7 @@ dbtpostgres:
       user: "{{ env_var('POSTGRES_USER') }}"
       pass: "{{ env_var('POSTGRES_PASSWORD') }}"
       dbname: "{{ env_var('POSTGRES_DB') }}"
-      schema: dbtpostgres
+      schema: "{{ env_var('DBT_SCHEMA') }}"
       threads: 4
       keepalives_idle: 0
 
