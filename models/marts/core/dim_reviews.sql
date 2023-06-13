@@ -13,12 +13,13 @@ dim_reviews AS (
     SELECT 
         votes_hash, votes, stars
     FROM stg_reviews
-    {% if is_incremental() %}
+    {{ check_incremental('votes_hash') }}
+    -- {% if is_incremental() %}
 
-    -- this filter will only be applied on an incremental run
-    WHERE votes_hash NOT IN (SELECT votes_hash FROM {{ this }})
+    -- -- this filter will only be applied on an incremental run
+    -- WHERE votes_hash NOT IN (SELECT votes_hash FROM {{ this }})
 
-    {% endif %}
+    -- {% endif %}
 )
 
 SELECT * FROM dim_reviews
