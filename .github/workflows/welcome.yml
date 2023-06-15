@@ -9,7 +9,23 @@ jobs:
     name: Welcome
     runs-on: ubuntu-latest
     steps:
-      - run: gh pr comment $PR_URL --body "Welcome developer!"
+      - name: Check PR comment history
+        id: check_comments
+        uses: actions/github-script@v5
+        with:
+          script: |
+            const comments = await github.pulls.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.payload.pull_request.number
+            });
+            core.setOutput('commentsCount', comments.data.length);
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Welcome developer
+        if: steps.check_comments.outputs.commentsCount == '0'
+        run: gh pr comment $PR_URL --body "Welcome developer!"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_URL: ${{ github.event.pull_request.html_url }}
