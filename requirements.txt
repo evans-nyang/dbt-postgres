@@ -1,0 +1,6 @@
+dbt-core==1.5.1
+dbt-postgres==1.5.1
+pgcli
+psycopg[pool,binary]
+psycopg2-binary
+astronomer-cosmos==0.6.8
