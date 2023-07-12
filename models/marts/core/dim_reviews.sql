@@ -10,7 +10,7 @@ WITH stg_reviews AS (
 ),
 
 dim_reviews AS (
-    SELECT 
+    SELECT DISTINCT
         votes_hash, votes, stars
     FROM stg_reviews
     {{ check_incremental('votes_hash') }}
