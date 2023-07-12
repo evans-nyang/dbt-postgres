@@ -10,7 +10,7 @@ WITH stg_brands AS (
 ),
 
 dim_brands AS (
-    SELECT 
+    SELECT DISTINCT
         brand_hash, brand
     FROM stg_brands
     {{ check_incremental('brand_hash') }}
